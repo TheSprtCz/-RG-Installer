@@ -16,7 +16,7 @@ import subprocess
 
 #Přípravy
 os.system('setterm -cursor off')
-version="1.2a"
+version="1.2b"
 
 #Defaultni hodnoty
 ic6=True
@@ -28,8 +28,8 @@ op=True
 mmap="r"
 ser=True
 q=False
-url=
-	
+urlm="http://www.mirc.cz/"
+
 #Getch
 class _Getch:
     """Získá jeden znak bez výstupu na obrazovku"""
@@ -95,7 +95,8 @@ def downloadq(url,text):
 	urllib.urlretrieve (url, name)
 	print "...hotovo"
 def down(name,quiet,text):
-	url="http://www.mirc.cz/"+name
+	global urlm
+	url=urlm+name
 	if not quiet:
 		downloadq(url,text)
 	else:
