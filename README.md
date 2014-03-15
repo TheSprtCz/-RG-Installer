@@ -1,4 +1,6 @@
-installer
+Installer
 =========
 
-MC- modpack Installater
+MC - modpacks Installer
+
+By Sprt
