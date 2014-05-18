@@ -29,6 +29,7 @@ mmap="r"
 ser=True
 q=False
 urlm="http://www.mirc.cz/"
+cure7=True
 
 #Getch
 class _Getch:
@@ -196,6 +197,7 @@ if not sel:
 	eden=select("Chcete nainstalovat Eden mody?",True)
 	st=select("Chcete nainstalovat SkyTech mody?",True)
 	op=select("Chcete nainstalovat Optifine?",True)
+	core7=select("Chcete nainstalovat 1.7.2 mody?",True)
 	print "Jaky z minimap modu chcete nainstalovat?"
 	write("R-Rei's minimap, Z-Zan's minimap, M-MapWriter, N-Žádný ")
 	let=getch()
@@ -222,6 +224,11 @@ if forge:
 	down("forge.tar.gz",q,"Forge")
 	down("libs.tar.gz",q,"knihovny")
 down("servers.dat",q,"seznam serverů")
+if core7:
+	down("core172.tar.gz",q,"1.7.2 mody")
+	core7dir=fdir+"/core172"
+	if not os.path.isdir(core7dir):
+		os.makedirs(core7dir)
 if ic6:
 	down("ic164.tar.gz",q,"IC2 mody")
 	ic6dir=fdir+"/ic164"
@@ -269,7 +276,11 @@ if ic6:
 	minmap(ic6dir,mmap)
 	if op:
 		extract("optifine164.tar.gz",ic6dir+"/mods","text",True)
-
+if core7:
+	if os.path.isdir(core7dir+"/mods"):
+		shutil.rmtree(core7dir+"/mods")
+	extract("ic164.tar.gz",core7dir,"1.7.2 mody",False)
+	serinfo(core7dir,ser)	
 if eden:
 	if os.path.isdir(edendir+"/mods"):
 		shutil.rmtree(edendir+"/mods")
@@ -308,16 +319,19 @@ if jsonl:
 	profiles=data["profiles"]
 	if ic6:
 		ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["IC2"]=ic6f
+		profiles["BP-IC-1.6.4"]=ic6f
+	if core7:
+		core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
+		profiles["BP-Core-1.7.2"]=core7f	
 	if eden:
 		edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["Eden"]=edenf
+		profiles["BP-Eden-1.6.4"]=edenf
 	if ic5:
 		ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
-		profiles["IC2 1.5.2"]=ic5f
+		profiles["BP-IC-1.5.2"]=ic5f
 	if st:
 		stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["SkyTech"]=stf	
+		profiles["BP-SkyTech-1.6.4"]=stf	
 	with open('launcher_profiles.json', 'wb') as outfile:
   		json.dump(data, outfile, sort_keys = True, indent = 4)
   	print "...hotovo"
@@ -330,16 +344,19 @@ if cjson:
 	profiles={}
 	if ic6:
 		ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["IC2"]=ic6f
+		profiles["BP-IC-1.6.4""]=ic6f
+	if core7:
+		core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
+		profiles["BP-Core-1.7.2"]=core7f
 	if eden:
 		edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["Eden"]=edenf
+		profiles["BP-Eden-1.6.4"]=edenf
 	if ic5:
 		ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
-		profiles["IC2 1.5.2"]=ic5f
+		profiles["BP-IC-1.5.2"]=ic5f
 	if st:
 		stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["SkyTech"]=stf
+		profiles["BP-SkyTech-1.6.4"]=stf
 	data["profiles"]=profiles	
 	data["authenticationDatabase"]={}
 	with open('launcher_profiles.json', 'wb') as outfile:
