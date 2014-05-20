@@ -344,7 +344,7 @@ if cjson:
 	profiles={}
 	if ic6:
 		ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-IC-1.6.4""]=ic6f
+		profiles["BP-IC-1.6.4"]=ic6f
 	if core7:
 		core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
 		profiles["BP-Core-1.7.2"]=core7f
