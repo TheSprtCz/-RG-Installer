@@ -279,7 +279,7 @@ if ic6:
 if core7:
 	if os.path.isdir(core7dir+"/mods"):
 		shutil.rmtree(core7dir+"/mods")
-	extract("ic164.tar.gz",core7dir,"1.7.2 mody",False)
+	extract("core172.tar.gz",core7dir,"1.7.2 mody",False)
 	serinfo(core7dir,ser)	
 if eden:
 	if os.path.isdir(edendir+"/mods"):
