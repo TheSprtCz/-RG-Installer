@@ -248,8 +248,8 @@ if eden:
 		os.makedirs(edendir)
 		
 if st:
-	down("iconly164.tar.gz",q,"Skytech mody")
-	stdir=fdir+"/iconly164"
+	down("skytech1710.tar.gz",q,"Skytech mody")
+	stdir=fdir+"/skytech1710"
 	if not os.path.isdir(stdir):
 		os.makedirs(stdir)
 		
