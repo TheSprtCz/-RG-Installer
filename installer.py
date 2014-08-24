@@ -2,24 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import sys
-#Kontrola verze
-if not sys.version_info.major == 2:
-	print "Chyba: Je potřebná verze 2.x pythonu"
-	end()
 #Načtění komponent Pythonu
 import os
 import time
 import urllib2
 import urllib
 import json
-import termios
-import fcntl
 import tarfile
 import shutil
 import subprocess
 
 #Přípravy
-os.system('setterm -cursor off')
 version="1.2b"
 
 #Defaultni hodnoty
@@ -75,30 +68,31 @@ class _GetchWindows:
 getch = _Getch()
 
 #Funkce
+
 def download(url):
-	file_name = url.split('/')[-1]
-	u = urllib2.urlopen(url)
-	f = open(file_name, 'wb')
-	meta = u.info()
-	file_size = int(meta.getheaders("Content-Length")[0])
-	print "Stahuji: %s Velikost: %s B" % (file_name, file_size)
-	file_size_dl = 0
-	block_sz = 8192
-	while True:
-    		buffer = u.read(block_sz)
-   		if not buffer:
-    			break
-   		file_size_dl += len(buffer)
-   		f.write(buffer)
-   		status = r"%10d B  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
-   		status = status + chr(8)*(len(status)+1)
-   		print status,
-	f.close()
+    file_name = url.split('/')[-1]
+    u = urllib2.urlopen(url)	
+    f = open(file_name, 'wb')
+    meta = u.info()
+    file_size = int(meta.getheaders("Content-Length")[0])
+    print("Stahuji: %s Velikost: %s B" % (file_name, file_size))
+    file_size_dl = 0
+    block_sz = 8192
+    while True:
+        buffer = u.read(block_sz)
+        if not buffer:
+            break
+        file_size_dl += len(buffer)
+        f.write(buffer)
+        status = r"%10d B  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
+        status = status + chr(8)*(len(status)+1)
+        print(status),
+    f.close()
 def downloadq(url,text):
 	write("Stahuji "+text)
 	name = url.split('/')[-1]
 	urllib.urlretrieve (url, name)
-	print "...hotovo"
+	print("...hotovo")
 def down(name,quiet,text):
 	global urlm
 	url=urlm+name
@@ -112,7 +106,7 @@ def read(nmb):
 	key=getch()
 	return key
 def end():
-	print "Pro ukončení stiskněte libovolnou klávesu"
+	print("Pro ukončení stiskněte libovolnou klávesu")
 	getch()
 	os.system('setterm -cursor on')	
 	exit()
@@ -129,12 +123,12 @@ def select(text,q):
 	if letter=="a" or letter=="A":
 		if q==True:
 			write("...vybráno")
-		print ""
+		print("")
 		return True
 	else:
 		if q==True:
 			write("...nevybráno")
-		print ""	
+		print("")	
 		return False
 def extract(name,path,text,quiet):
 	if not quiet:
@@ -143,7 +137,7 @@ def extract(name,path,text,quiet):
 	file.extractall(path)
 	file.close
 	if not quiet:
-		print "..hotovo"
+		print("..hotovo")
 def serinfo(path,ser):
 	if ser:
 		shutil.copy2("servers.dat",path)
@@ -153,17 +147,17 @@ def serinfo(path,ser):
 			#print "Kopiruji seznam serveru"
 											
 #Přeinstalační přípravy
-print "Vítejte v Instalátoru B-paradise, vytvořeného uživatelem Sprt ("+version+")"
+print("Vítejte v Instalátoru B-paradise, vytvořeného uživatelem Sprt ("+version+")")
 fdir=raw_input("\nVlozte cilovou slozku: ")
 if not fdir[0]=="/":
 	fdir=os.getcwd()+"/"+fdir
 if not os.path.isdir(fdir):
-	print "Slozka "+fdir+" neexistuje, chcete ji vytvořit? A/N "
+	print("Slozka "+fdir+" neexistuje, chcete ji vytvořit? A/N ")
 	bool=read(1)
 	if bool=="a" or bool=="A":
 		write("Vytvářím složku "+fdir)
 		os.makedirs(fdir)
-		print "...hotovo"
+		print("...hotovo")
 	else:
 		end()
 if not os.path.isdir(fdir+"/tmp"):
@@ -178,8 +172,8 @@ pos1=java_v.find('"')
 pos2=java_v.rfind('"')
 java_v=java_v[pos1+1:pos2]
 if not int(java_v[2])>=7:
-	print "\nVaše java("+java_v+") je zastaralá a proto Modpacky B-Paradise nemusí fungovat správně"
-	print "Prosím aktualizujte svoji javu na verzi 1.7 na www.java.com"
+	print("\nVaše java("+java_v+") je zastaralá a proto Modpacky B-Paradise nemusí fungovat správně")
+	print("Prosím aktualizujte svoji javu na verzi 1.7 na www.java.com")
 	
 #Kontrola launcheru
 if not os.path.exists(fdir+"/launcher_profiles.json"):
@@ -198,7 +192,7 @@ if not sel:
 	st=select("Chcete nainstalovat SkyTech mody?",True)
 	op=select("Chcete nainstalovat Optifine?",True)
 	core7=select("Chcete nainstalovat 1.7.2 mody?",True)
-	print "Jaky z minimap modu chcete nainstalovat?"
+	print("Jaky z minimap modu chcete nainstalovat?")
 	write("R-Rei's minimap, Z-Zan's minimap, M-MapWriter, N-Žádný ")
 	let=getch()
 	if let=="r" or let=="R":
@@ -213,7 +207,7 @@ if not sel:
 	if let=="n" or let=="N":
 		write("...Žádný")
 		mmap="n"
-	print ""
+	print("")
 	forge=select("Chcete nainstalovat Forge a jeho knihovny?",True)				
 	ser=select("Chcete přepsat seznamy serverů?",True)
 	q=select("Chcete podrobné informace o stahování?",True)
@@ -308,65 +302,64 @@ if ic5:
 
 #úprava launcher_profiles.json
 if jsonl:
-	write("\nPřidávání profilů")
-	os.chdir(fdir)
-	try:
-		with open("launcher_profiles.json") as json_file:
-    			data = json.load(json_file)
-    	except ValueError:
-    		print("Neplatný .json")
-    		end()		
-	profiles=data["profiles"]
-	if ic6:
-		ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-IC-1.6.4"]=ic6f
-	if core7:
-		core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
-		profiles["BP-Core-1.7.2"]=core7f	
-	if eden:
-		edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-Eden-1.6.4"]=edenf
-	if ic5:
-		ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
-		profiles["BP-IC-1.5.2"]=ic5f
-	if st:
-		stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-SkyTech-1.6.4"]=stf	
-	with open('launcher_profiles.json', 'wb') as outfile:
-  		json.dump(data, outfile, sort_keys = True, indent = 4)
-  	print "...hotovo"
-  	
+    write("\nPřidávání profilů")
+    os.chdir(fdir)
+    try:
+        with open("launcher_profiles.json") as json_file:
+            data = json.load(json_file)
+    except (ValueError) as e:
+        print("Neplatný .json")
+        end()		
+    profiles=data["profiles"]
+    if ic6:
+        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        profiles["BP-IC-1.6.4"]=ic6f
+    if core7:
+        core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
+        profiles["BP-Core-1.7.2"]=core7f	
+    if eden:
+        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        profiles["BP-Eden-1.6.4"]=edenf
+    if ic5:
+        ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
+        profiles["BP-IC-1.5.2"]=ic5f
+    if st:
+        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        profiles["BP-SkyTech-1.6.4"]=stf	
+    with open('launcher_profiles.json', 'wb') as outfile:
+        json.dump(data, outfile, sort_keys = True, indent = 4)
+    print("...hotovo")    
 #Generace nového .json
 if cjson:
-	os.chdir(fdir)
-	write("\nGeneruji nový launcher_profiles.json")
-	data={}
-	profiles={}
-	if ic6:
-		ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-IC-1.6.4"]=ic6f
-	if core7:
-		core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
-		profiles["BP-Core-1.7.2"]=core7f
-	if eden:
-		edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-Eden-1.6.4"]=edenf
-	if ic5:
-		ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
-		profiles["BP-IC-1.5.2"]=ic5f
-	if st:
-		stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-		profiles["BP-SkyTech-1.6.4"]=stf
-	data["profiles"]=profiles	
-	data["authenticationDatabase"]={}
-	with open('launcher_profiles.json', 'wb') as outfile:
-  		json.dump(data, outfile, sort_keys = True, indent = 4)
-  	print("...hotovo")					
+    os.chdir(fdir)
+    write("\nGeneruji nový launcher_profiles.json")
+    data={}
+    profiles={}
+    if ic6:
+        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        profiles["BP-IC-1.6.4"]=ic6f
+    if core7:		
+        core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
+        profiles["BP-Core-1.7.2"]=core7f
+    if eden:
+        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        profiles["BP-Eden-1.6.4"]=edenf
+    if ic5:
+        ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
+        profiles["BP-IC-1.5.2"]=ic5f
+    if st:
+        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        profiles["BP-SkyTech-1.6.4"]=stf
+    data["profiles"]=profiles	
+    data["authenticationDatabase"]={}
+    with open('launcher_profiles.json', 'wb') as outfile:
+        json.dump(data, outfile, sort_keys = True, indent = 4)
+    print("...hotovo")
 #Poinstalační
 write("\nOdstranuji dočasné soubory")
 shutil.rmtree(fdir+"/tmp")
-print "...hotovo"
-print "\nInstalace kompletní"
+print("...hotovo")
+print("\nInstalace kompletní")
 end()
 
 
