@@ -1,13 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import sys
+#Kontrola verze
+if not sys.version_info.major == 2:
+	print "Chyba: Je potřebná verze 2.x pythonu"
+	end()
 #Načtění komponent Pythonu
 import os
 import time
 import urllib2
 import urllib
 import json
-import sys
 import termios
 import fcntl
 import tarfile
@@ -147,10 +151,6 @@ def serinfo(path,ser):
 		if not os.path.exists(path+"/servers.dat"):
 			shutil.copy2("servers.dat",path)
 			#print "Kopiruji seznam serveru"
-#Kontrola verze
-if not sys.version_info[:1] == (2,):
-	print "Chyba: Je potřebná verze 2.x pythonu"
-	end()
 											
 #Přeinstalační přípravy
 print "Vítejte v Instalátoru B-paradise, vytvořeného uživatelem Sprt ("+version+")"
