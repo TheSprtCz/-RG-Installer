@@ -286,7 +286,7 @@ if eden:
 if st:
 	if os.path.isdir(stdir+"/mods"):
 		shutil.rmtree(stdir+"/mods")
-	extract("iconly164.tar.gz",stdir,"Skytech mody",False)
+	extract("skytech1710.tar.gz",stdir,"Skytech mody",False)
 	serinfo(stdir,ser)
 	minmap(stdir,mmap)
 	if op:
@@ -325,7 +325,7 @@ if jsonl:
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
         stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-SkyTech-1.6.4"]=stf	
+        profiles["BP-SkyTech-1.7.10]=stf	
     with open('launcher_profiles.json', 'wb') as outfile:
         json.dump(data, outfile, sort_keys = True, indent = 4)
     print("...hotovo")    
@@ -349,7 +349,7 @@ if cjson:
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
         stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-SkyTech-1.6.4"]=stf
+        profiles["BP-SkyTech-1.7.10"]=stf
     data["profiles"]=profiles	
     data["authenticationDatabase"]={}
     with open('launcher_profiles.json', 'wb') as outfile:
