@@ -224,8 +224,8 @@ if core7:
 	if not os.path.isdir(core7dir):
 		os.makedirs(core7dir)
 if ic6:
-	down("ic164.tar.gz",q,"IC2 mody")
-	ic6dir=fdir+"/ic164"
+	down("gt1710.tar.gz",q,"IC2 mody")
+	ic6dir=fdir+"/ic1710"
 	if not os.path.isdir(ic6dir):
 		os.makedirs(ic6dir)
 
@@ -236,8 +236,8 @@ if ic5:
 		os.makedirs(ic5dir)
 			
 if eden:
-	down("eden164.tar.gz",q,"Eden mody")
-	edendir=fdir+"/eden164"
+	down("eden1710.tar.gz",q,"Eden mody")
+	edendir=fdir+"/eden1710"
 	if not os.path.isdir(edendir):
 		os.makedirs(edendir)
 		
@@ -265,7 +265,7 @@ if forge:
 if ic6:
 	if os.path.isdir(ic6dir+"/mods"):
 		shutil.rmtree(ic6dir+"/mods")
-	extract("ic164.tar.gz",ic6dir,"IC2 mody",False)
+	extract("gt1710.tar.gz",ic6dir,"IC2 mody",False)
 	serinfo(ic6dir,ser)
 	minmap(ic6dir,mmap)
 	if op:
@@ -278,7 +278,7 @@ if core7:
 if eden:
 	if os.path.isdir(edendir+"/mods"):
 		shutil.rmtree(edendir+"/mods")
-	extract("eden164.tar.gz",edendir,"Eden mody",False)
+	extract("eden1710.tar.gz",edendir,"Eden mody",False)
 	serinfo(edendir,ser)
 	minmap(edendir,mmap)
 	if op:
@@ -294,7 +294,7 @@ if st:
 if ic5:
 	if os.path.isdir(ic5dir+"/mods"):
 		shutil.rmtree(ic5dir+"/mods")
-	extract("ic164.tar.gz",ic5dir,"IC2 mody",False)
+	extract("ic152.tar.gz",ic5dir,"IC2 1.5.2 mody",False)
 	serinfo(ic5dir,ser)
 	minmap(ic5dir,mmap)	
 	if op:
@@ -312,19 +312,19 @@ if jsonl:
         end()		
     profiles=data["profiles"]
     if ic6:
-        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-IC-1.6.4"]=ic6f
+        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        profiles["BP-IC-1.7.1.0"]=ic6f
     if core7:
         core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
         profiles["BP-Core-1.7.2"]=core7f	
     if eden:
-        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-Eden-1.6.4"]=edenf
+        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        profiles["BP-Eden-1.7.1.0"]=edenf
     if ic5:
         ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
-        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
+        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
         profiles["BP-SkyTech-1.7.10]=stf	
     with open('launcher_profiles.json', 'wb') as outfile:
         json.dump(data, outfile, sort_keys = True, indent = 4)
@@ -336,20 +336,20 @@ if cjson:
     data={}
     profiles={}
     if ic6:
-        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-IC-1.6.4"]=ic6f
+        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        profiles["BP-IC-1.7.1.0"]=ic6f
     if core7:		
         core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
         profiles["BP-Core-1.7.2"]=core7f
     if eden:
-        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-Eden-1.6.4"]=edenf
+        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        profiles["BP-Eden-1.7.1.0"]=edenf
     if ic5:
         ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
-        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.6.4-Forge9.11.1.953'}
-        profiles["BP-SkyTech-1.7.10"]=stf
+        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        profiles["BP-SkyTech-1.7.10]=stf
     data["profiles"]=profiles	
     data["authenticationDatabase"]={}
     with open('launcher_profiles.json', 'wb') as outfile:
