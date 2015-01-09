@@ -337,10 +337,10 @@ if jsonl:
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
         stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
-        profiles["BP-SkyTech-1.7.10]=stf
+        profiles["BP-SkyTech-1.7.10"]=stf
     if apo:
         apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
-        profiles["BP-Apocalypse-1.7.10]=apoj
+        profiles["BP-Apocalypse-1.7.10"]=apoj
     with open('launcher_profiles.json', 'wb') as outfile:
         json.dump(data, outfile, sort_keys = True, indent = 4)
     print("...hotovo")    
