@@ -232,7 +232,7 @@ if ic6:
 
 if apo:
 	down("apoc1710.tar.gz",q,"Apocalypsu")
-	ic6dir=fdir+"/apoc1710"
+	apodir=fdir+"/apoc1710"
 	if not os.path.isdir(apodir):
 		os.makedirs(apodir)
 
@@ -281,7 +281,7 @@ if apo:
 	if os.path.isdir(apodir+"/mods"):
 		shutil.rmtree(apodir+"/mods")
 	extract("apoc1710.tar.gz",apodir,"Apocalypsu",False)
-	serinfo(apo6dir,ser)
+	serinfo(apodir,ser)
 if core7:
 	if os.path.isdir(core7dir+"/mods"):
 		shutil.rmtree(core7dir+"/mods")
@@ -364,10 +364,10 @@ if cjson:
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
         stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
-        profiles["BP-SkyTech-1.7.10]=stf
+        profiles["BP-SkyTech-1.7.10"]=stf
     if apo:
         apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
-        profiles["BP-Apocalypse-1.7.10]=apoj
+        profiles["BP-Apocalypse-1.7.10"]=apoj
     data["profiles"]=profiles	
     data["authenticationDatabase"]={}
     with open('launcher_profiles.json', 'wb') as outfile:
