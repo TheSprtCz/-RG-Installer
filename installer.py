@@ -192,6 +192,7 @@ if not sel:
 	st=select("Chcete nainstalovat SkyTech mody?",True)
 	op=select("Chcete nainstalovat Optifine?",True)
 	core7=select("Chcete nainstalovat 1.7.2 mody?",True)
+	apo=select("Chcete nainstalovat Apocalypsu?",True)
 	print("Jaky z minimap modu chcete nainstalovat?")
 	write("R-Rei's minimap, Z-Zan's minimap, M-MapWriter, N-Žádný ")
 	let=getch()
@@ -228,6 +229,12 @@ if ic6:
 	ic6dir=fdir+"/ic1710"
 	if not os.path.isdir(ic6dir):
 		os.makedirs(ic6dir)
+
+if apo:
+	down("apoc1710.tar.gz",q,"Apocalypsu")
+	ic6dir=fdir+"/apoc1710"
+	if not os.path.isdir(apodir):
+		os.makedirs(apodir)
 
 if ic5:
 	down("ic152.tar.gz",q,"IC2 mody pro 1.5.2")
@@ -270,6 +277,11 @@ if ic6:
 	minmap(ic6dir,mmap)
 	if op:
 		extract("optifine164.tar.gz",ic6dir+"/mods","text",True)
+if apo:
+	if os.path.isdir(apodir+"/mods"):
+		shutil.rmtree(apodir+"/mods")
+	extract("apoc1710.tar.gz",apodir,"Apocalypsu",False)
+	serinfo(apo6dir,ser)
 if core7:
 	if os.path.isdir(core7dir+"/mods"):
 		shutil.rmtree(core7dir+"/mods")
@@ -312,20 +324,23 @@ if jsonl:
         end()		
     profiles=data["profiles"]
     if ic6:
-        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-IC-1.7.1.0"]=ic6f
     if core7:
         core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
         profiles["BP-Core-1.7.2"]=core7f	
     if eden:
-        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-Eden-1.7.1.0"]=edenf
     if ic5:
         ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
-        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
-        profiles["BP-SkyTech-1.7.10]=stf	
+        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+        profiles["BP-SkyTech-1.7.10]=stf
+    if apo:
+        apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+        profiles["BP-Apocalypse-1.7.10]=apoj
     with open('launcher_profiles.json', 'wb') as outfile:
         json.dump(data, outfile, sort_keys = True, indent = 4)
     print("...hotovo")    
@@ -336,20 +351,23 @@ if cjson:
     data={}
     profiles={}
     if ic6:
-        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-IC-1.7.1.0"]=ic6f
     if core7:		
         core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
         profiles["BP-Core-1.7.2"]=core7f
     if eden:
-        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-Eden-1.7.1.0"]=edenf
     if ic5:
         ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
-        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.1.0-Forge10.13.2.1236'}
+        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-SkyTech-1.7.10]=stf
+    if apo:
+        apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+        profiles["BP-Apocalypse-1.7.10]=apoj
     data["profiles"]=profiles	
     data["authenticationDatabase"]={}
     with open('launcher_profiles.json', 'wb') as outfile:
