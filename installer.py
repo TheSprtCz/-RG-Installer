@@ -21,13 +21,22 @@ ic5=False
 eden=True
 st=True
 forge=True
-op=True
 mmap="r"
 ser=True
 q=False
 urlm="http://www.mirc.cz/"
 cure7=True
+core8=True
+apo=True
 
+core7dir=""
+ic6dir=""
+ic5dir=""
+edendir=""
+stdir=""
+cure7dir=""
+core8dir=""
+apodir=""
 #Getch
 class _Getch:
     """Získá jeden znak bez výstupu na obrazovku"""
@@ -184,31 +193,31 @@ else:
 	cjson=False
 	
 #Výběr komponent
-sel=select("\nChcete použít k instalaci standardní nastavení? (Všechny modpacky, OptiFine, Rei's minimap)",True)
+sel=select("\nChcete použít k instalaci standardní nastavení? (Všechny modpacky, Rei's minimap)",True)
 if not sel:
 	ic6=select("Chcete nainstalovat IC2 mody?",True)
 	ic5=select("Chcete nainstalovat IC2 mody na 1.5.2?",True)
 	eden=select("Chcete nainstalovat Eden mody?",True)
 	st=select("Chcete nainstalovat SkyTech mody?",True)
-	op=select("Chcete nainstalovat Optifine?",True)
 	core7=select("Chcete nainstalovat 1.7.2 mody?",True)
 	apo=select("Chcete nainstalovat Apocalypsu?",True)
-	print("Jaky z minimap modu chcete nainstalovat?")
-	write("R-Rei's minimap, Z-Zan's minimap, M-MapWriter, N-Žádný ")
-	let=getch()
-	if let=="r" or let=="R":
-		write("...Rei's minimap")
-		mmap="r"
-	if let=="z" or let=="Z":
-		write("...Zan's minimap")
-		mmap="z"
-	if let=="m" or let=="M":
-		write("...MapWritter")
-		mmap="m"
-	if let=="n" or let=="N":
-		write("...Žádný")
-		mmap="n"
-	print("")
+	core8=select("Chcete nainstalovat Core 1.8?",True)
+# 	print("Jaky z minimap modu chcete nainstalovat?")
+#	write("R-Rei's minimap, Z-Zan's minimap, M-MapWriter, N-Žádný ")
+#	let=getch()
+#	if let=="r" or let=="R":
+#		write("...Rei's minimap")
+#		mmap="r"
+#	if let=="z" or let=="Z":
+#		write("...Zan's minimap")
+#		mmap="z"
+#	if let=="m" or let=="M":
+#		write("...MapWritter")
+#		mmap="m"
+#	if let=="n" or let=="N":
+#		write("...Žádný")
+#		mmap="n"
+#	print("")  
 	forge=select("Chcete nainstalovat Forge a jeho knihovny?",True)				
 	ser=select("Chcete přepsat seznamy serverů?",True)
 	q=select("Chcete podrobné informace o stahování?",True)
@@ -253,18 +262,22 @@ if st:
 	stdir=fdir+"/skytech1710"
 	if not os.path.isdir(stdir):
 		os.makedirs(stdir)
-		
-if op:
-	down("optifine164.tar.gz",q,"Optifine")
+if core8:
+	down("core18.tar.gz",q,"Core 1.8")
+	core8dir=fdir+"/core18"
+	if not os.path.isdir(core8dir):
+		os.makedirs(core8dir)
+#if op:
+#	down("optifine164.tar.gz",q,"Optifine")
 	
-if mmap=="r":
-	down("reismm164.tar.gz",q,"Rei's minimap")
+#if mmap=="r":
+#	down("reismm164.tar.gz",q,"Rei's minimap")
 	
-if mmap=="z":
-	down("zansmm164.tar.gz",q,"Zen's minimap")
+#if mmap=="z":
+#	down("zansmm164.tar.gz",q,"Zen's minimap")
 	
-if mmap=="m":	
-	down("mapwritter164.tar.gz",q,"Map Writter")
+#if mmap=="m":	
+#	down("mapwritter164.tar.gz",q,"Map Writter")
 #Instalace komponent
 if forge:
 	extract("forge.tar.gz",fdir+"/versions","Forge",False)
@@ -274,9 +287,6 @@ if ic6:
 		shutil.rmtree(ic6dir+"/mods")
 	extract("gt1710.tar.gz",ic6dir,"IC2 mody",False)
 	serinfo(ic6dir,ser)
-	minmap(ic6dir,mmap)
-	if op:
-		extract("optifine164.tar.gz",ic6dir+"/mods","text",True)
 if apo:
 	if os.path.isdir(apodir+"/mods"):
 		shutil.rmtree(apodir+"/mods")
@@ -292,26 +302,30 @@ if eden:
 		shutil.rmtree(edendir+"/mods")
 	extract("eden1710.tar.gz",edendir,"Eden mody",False)
 	serinfo(edendir,ser)
-	minmap(edendir,mmap)
-	if op:
-		extract("optifine164.tar.gz",edendir+"/mods","text",True)				
 if st:
 	if os.path.isdir(stdir+"/mods"):
 		shutil.rmtree(stdir+"/mods")
 	extract("skytech1710.tar.gz",stdir,"Skytech mody",False)
 	serinfo(stdir,ser)
-	minmap(stdir,mmap)
-	if op:
-		extract("optifine164.tar.gz",stdir+"/mods","text",True)	
+if core8:
+	if os.path.isdir(core8dir+"/mods"):
+		shutil.rmtree(core8dir+"/mods")
+	extract("core18.tar.gz",stdir,"Core 1.8 mody",False)
+	serinfo(core8dir,ser)
 if ic5:
 	if os.path.isdir(ic5dir+"/mods"):
 		shutil.rmtree(ic5dir+"/mods")
 	extract("ic152.tar.gz",ic5dir,"IC2 1.5.2 mody",False)
 	serinfo(ic5dir,ser)
-	minmap(ic5dir,mmap)	
-	if op:
-		extract("optifine164.tar.gz",ic5dir+"/mods","text",True)
 
+#Profily
+ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
+edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
+stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
+core8f={u'gameDir': u''+core8dir, u'name': u'Core 1.8', u'lastVersionId': u'1.8-Forge11.14.1.1332'}
 #úprava launcher_profiles.json
 if jsonl:
     write("\nPřidávání profilů")
@@ -324,23 +338,19 @@ if jsonl:
         end()		
     profiles=data["profiles"]
     if ic6:
-        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-IC-1.7.1.0"]=ic6f
     if core7:
-        core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
         profiles["BP-Core-1.7.2"]=core7f	
     if eden:
-        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-Eden-1.7.1.0"]=edenf
     if ic5:
-        ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
-        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-SkyTech-1.7.10"]=stf
     if apo:
-        apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-Apocalypse-1.7.10"]=apoj
+    if core8:
+        profiles["BP-Core-1.8"]=core8f
     with open('launcher_profiles.json', 'wb') as outfile:
         json.dump(data, outfile, sort_keys = True, indent = 4)
     print("...hotovo")    
@@ -351,23 +361,19 @@ if cjson:
     data={}
     profiles={}
     if ic6:
-        ic6f={u'gameDir': u''+ic6dir, u'name': u'IC2', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-IC-1.7.1.0"]=ic6f
     if core7:		
-        core7f={u'gameDir': u''+core7dir, u'name': u'BP-Core-1.7.2', u'lastVersionId': u'1.7.2-Forge10.12.1.1082'}
         profiles["BP-Core-1.7.2"]=core7f
     if eden:
-        edenf={u'gameDir': u''+edendir, u'name': u'Eden', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-Eden-1.7.1.0"]=edenf
     if ic5:
-        ic5f={u'gameDir': u''+ic5dir, u'name': u'IC2 1.5.2', u'lastVersionId': u'1.5.2-Forge738'}
         profiles["BP-IC-1.5.2"]=ic5f
     if st:
-        stf={u'gameDir': u''+stdir, u'name': u'SkyTech', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-SkyTech-1.7.10"]=stf
     if apo:
-        apoj={u'gameDir': u''+apodir, u'name': u'Apocalypsa', u'lastVersionId': u'1.7.10-Forge10.13.2.1277'}
         profiles["BP-Apocalypse-1.7.10"]=apoj
+    if core8:
+        profiles["BP-Core-1.8"]=core8f
     data["profiles"]=profiles	
     data["authenticationDatabase"]={}
     with open('launcher_profiles.json', 'wb') as outfile:
