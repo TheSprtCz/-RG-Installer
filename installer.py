@@ -25,7 +25,7 @@ mmap="r"
 ser=True
 q=False
 urlm="http://www.mirc.cz/"
-cure7=True
+core7=True
 core8=True
 apo=True
 
