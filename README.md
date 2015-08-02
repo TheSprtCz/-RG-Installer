@@ -1,12 +1,10 @@
-Installer
+RebelGames.net Installer
 =========
 
-MC - modpacks Installer
+Instalátor modpacku pro server RebelGames.net
+Verze pro python 3 bude brzy (snad)
 
-
-GUI version in development and coming soon :-)
-
-Copyright (C) 2014  SprtCZ
+Copyright (C) 2015  SprtCZ
 
 			
 
