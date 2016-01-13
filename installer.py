@@ -15,7 +15,7 @@ import ConfigParser
 
 
 #Variables
-version = "2.0"
+version = "2.1"
 url = "http://www.mirc.cz/"
 options = []
 new_profiles = []
@@ -204,9 +204,10 @@ addOption("libs","Chcete nainstalovat knihovny Forge?","knihovny forge","libs",T
 #Config Processing
 config.read("config.ini")
 for section in config.sections():
-    if not "dev" in section or devVersions:
-        addOption(section,"Chcete nainstalovat modpack "+config.get(section,"description")+"?",config.get(section,"description"),"modpack",True,True,False,{"forge":config.get(section,"forge")})
-        debug("Přidán modpack "+section)
+		if not "rg" in section:
+		  if not "dev" in section or devVersions:
+		      addOption(section,"Chcete nainstalovat modpack "+config.get(section,"description")+"?",config.get(section,"description"),"modpack",True,True,False,{"forge":config.get(section,"forge")})
+		      debug("Přidán modpack "+section)
 processOptions()
 #print json.dumps(options)
 downloadAll()
