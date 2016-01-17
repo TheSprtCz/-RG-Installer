@@ -129,7 +129,7 @@ def downloadStream(u, file_name):
     f.close()
 def downloadAll():
     for option in options:
-        if option["download"]:
+        if option["download"] and option["value"]:
             downloadOption(option)
 
 def end():
