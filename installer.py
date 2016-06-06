@@ -15,7 +15,7 @@ import ConfigParser
 
 
 #Variables
-version = "2.1"
+version = "2.1a"
 url = "http://www.mirc.cz/"
 options = []
 new_profiles = []
@@ -148,7 +148,7 @@ def doAction(actionText,actionFunction):
     write("...hotovo\n")
 def addProfiles(data):
     for profile in new_profiles:
-        data[profile["name"]] = {u'gameDir': u''+profile["dir"], u'name': u''+profile["name"]+'', u'lastVersionId': u''+profile["forge"]}
+        data["profiles"][profile["name"]] = {u'gameDir': u''+profile["dir"], u'name': u''+profile["name"]+'', u'lastVersionId': u''+profile["forge"]}
     with open('launcher_profiles.json', 'wb') as outfile:
         json.dump(data, outfile, sort_keys = True, indent = 4)
     print("...hotovo")   
